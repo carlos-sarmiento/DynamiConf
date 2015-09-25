@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using DynamiConf.Providers.Helpers;
 
 namespace DynamiConf
 {
@@ -59,7 +60,7 @@ namespace DynamiConf
 
         private Configuration Clone()
         {
-            return null;
+            return DynamicMerger.Merge(new Configuration(), this);
         }
 
         #region Implementation of IEnumerable
