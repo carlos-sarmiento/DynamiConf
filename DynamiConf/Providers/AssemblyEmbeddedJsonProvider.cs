@@ -20,7 +20,7 @@ namespace DynamiConf.Providers
             var resources = GetExpandoFromAssemblies(assemblies.Where(assembly => assembly != entryAssembly), resourcePostfix);
 
             if (entryAssembly != null)
-                resources.UpdateWith(GetExpandoFromAssemblies(new[] { entryAssembly }, resourcePostfix));
+                resources = resources.UpdateWith(GetExpandoFromAssemblies(new[] { entryAssembly }, resourcePostfix));
 
             provider.RegisterConfiguration(ExpandoObject2Configuration.Transform(resources));
             return provider.DynamiConfiguration;

@@ -8,6 +8,11 @@ namespace DynamiConf
     {
         private readonly Dictionary<string, object> _confValues = new Dictionary<string, object>();
 
+        public override IEnumerable<string> GetDynamicMemberNames()
+        {
+            return _confValues.Keys;
+        }
+
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
             result = _confValues.ContainsKey(binder.Name)
