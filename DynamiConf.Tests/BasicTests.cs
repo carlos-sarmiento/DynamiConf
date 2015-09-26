@@ -17,11 +17,7 @@ namespace DynamiConf.Tests
         [TestMethod]
         public void GetConfigurationFromJsonString()
         {
-            var config = new DynamiConfiguration()
-                .MergeWith.JsonString("{ \"key\": \"value\"}")
-                .GetConfiguration();
 
-            Assert.IsNotNull(config.key);
         }
     }
 }

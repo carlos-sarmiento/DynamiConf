@@ -1,10 +1,8 @@
-﻿using DynamiConf.Providers.Helpers;
-
-namespace DynamiConf
+﻿namespace DynamiConf.Helpers
 {
-    public class ConfigurationSources
+    public class InterpreterSources
     {
-        internal ConfigurationSources(DynamiConfiguration loader)
+        internal InterpreterSources(DynamiConfiguration loader)
         {
             DynamiConfiguration = loader;
             FinalConfiguration = new Configuration();

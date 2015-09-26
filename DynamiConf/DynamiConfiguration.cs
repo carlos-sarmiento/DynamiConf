@@ -1,14 +1,16 @@
-﻿namespace DynamiConf
+﻿using DynamiConf.Helpers;
+
+namespace DynamiConf
 {
     public class DynamiConfiguration
     {
         // Esta clase construye un objeto configuration
         public DynamiConfiguration()
         {
-            MergeWith = new ConfigurationSources(this);
+            MergeWith = new InterpreterSources(this);
         }
 
-        public ConfigurationSources MergeWith { get; private set; }
+        public InterpreterSources MergeWith { get; private set; }
 
         public dynamic GetConfiguration()
         {

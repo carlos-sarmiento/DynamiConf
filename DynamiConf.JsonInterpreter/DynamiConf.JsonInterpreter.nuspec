@@ -15,6 +15,6 @@
       Separated providers into Locators and Interpreters for more fine-grained configuration.
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>Configuration Dynamic DynamiConf Conf AppSettings EnvironmentVar </tags>
+    <tags>Configuration Dynamic DynamiConf Conf Json</tags>
   </metadata>
 </package>

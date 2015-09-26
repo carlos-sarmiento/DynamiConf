@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 
-namespace DynamiConf.Providers.Helpers
+namespace DynamiConf.Helpers
 {
     internal static class DynamicMerger
     {
-        internal static ExpandoObject Merge(ExpandoObject o1, ExpandoObject o2)
+        private static ExpandoObject Merge(ExpandoObject o1, ExpandoObject o2)
         {
             return o1.UpdateWith(o2);
         }
@@ -70,7 +70,7 @@ namespace DynamiConf.Providers.Helpers
             return newExpando;
         }
 
-        internal static Configuration Merge(Configuration o1, Configuration o2)
+        private static Configuration Merge(Configuration o1, Configuration o2)
         {
             return o1.UpdateWith(o2);
         }

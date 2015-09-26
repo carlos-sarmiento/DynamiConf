@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using DynamiConf.Providers.Helpers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using DynamiConf.Helpers;
 
-namespace DynamiConf.Providers
+namespace DynamiConf.Locators
 {
-    public static class DirectoryHierarchyProvider
+    public static class DirectoryHierarchyLocator
     {
-        public static DynamiConfiguration ChainedJson(this ConfigurationSources provider, string resourcePostfix = "settings.conf.json")
+        public static DynamiConfiguration ChainedHierarchy(this LocationSources provider, string resourcePostfix = "settings.conf")
         {
             var executionPath = AppDomain.CurrentDomain.BaseDirectory;
 
-            provider.RegisterConfiguration(ExpandoObject2Configuration.Transform(LoadAllJsonFromChain(executionPath, resourcePostfix)));
+            provider.RegisterConfiguration(LoadAllFilesFromChain(executionPath, resourcePostfix, provider.Interpreter));
 
-            return provider.DynamiConfiguration;
+            return provider.Configuration;
         }
 
-
-        private static ExpandoObject LoadAllJsonFromChain(string path, string resourcePostfix)
+        private static Configuration LoadAllFilesFromChain(string path, string resourcePostfix, IConfigurationInterpreter interpreter)
         {
             var files = new List<FileInfo>();
 
@@ -41,9 +36,9 @@ namespace DynamiConf.Providers
             files.Reverse();
 
             return files.Select(c => File.ReadAllText(c.FullName))
-                        .Aggregate(new ExpandoObject(), (current, resource) =>
+                        .Aggregate(new Configuration(), (current, resource) =>
                         {
-                            var obj = JsonConvert.DeserializeObject<ExpandoObject>(resource, new ExpandoObjectConverter());
+                            var obj = interpreter.ParseConfiguration(resource);
                             return current.UpdateWith(obj);
                         });
         }

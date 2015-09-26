@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 
-namespace DynamiConf.Providers.Helpers
+namespace DynamiConf.Helpers
 {
     public static class ExpandoObject2Configuration
     {
