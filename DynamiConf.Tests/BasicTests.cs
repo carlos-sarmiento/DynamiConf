@@ -1,5 +1,5 @@
 ﻿using System;
-using DynamiConf.Providers;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DynamiConf.Tests

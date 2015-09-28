@@ -33,6 +33,9 @@ namespace DynamiConf.JsonInterpreter
 
         public Configuration ParseConfiguration(string configuration)
         {
+            if (string.IsNullOrWhiteSpace(configuration))
+                return new Configuration();
+
             var expando = _settings != null
                 ? JsonConvert.DeserializeObject<ExpandoObject>(configuration, _settings)
                 : JsonConvert.DeserializeObject<ExpandoObject>(configuration, new ExpandoObjectConverter());

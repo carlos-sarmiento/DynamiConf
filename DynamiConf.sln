@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamiConf.AzureLocator", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamiConf.IniInterpreter", "DynamiConf.IniInterpreter\DynamiConf.IniInterpreter.csproj", "{68DC44F8-9D6E-4912-BB24-EE7420471723}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamiConf.HttpLocator", "DynamiConf.HttpLocator\DynamiConf.HttpLocator.csproj", "{4C6044A6-3D6E-436D-B002-E1482D9B0DA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{68DC44F8-9D6E-4912-BB24-EE7420471723}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68DC44F8-9D6E-4912-BB24-EE7420471723}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68DC44F8-9D6E-4912-BB24-EE7420471723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C6044A6-3D6E-436D-B002-E1482D9B0DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C6044A6-3D6E-436D-B002-E1482D9B0DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C6044A6-3D6E-436D-B002-E1482D9B0DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C6044A6-3D6E-436D-B002-E1482D9B0DA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
