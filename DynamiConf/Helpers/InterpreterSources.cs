@@ -4,17 +4,14 @@
     {
         internal InterpreterSources(DynamiConfiguration loader)
         {
-            DynamiConfiguration = loader;
-            FinalConfiguration = new Configuration();
+            Configuration = loader;
         }
 
-        public DynamiConfiguration DynamiConfiguration { get; private set; }
-
-        internal Configuration FinalConfiguration { get; set; }
+        public DynamiConfiguration Configuration { get; private set; }
 
         public void RegisterConfiguration(Configuration configuration)
         {
-            FinalConfiguration = FinalConfiguration.UpdateWith(configuration);
+            Configuration.RegisterConfiguration(configuration);
         }
     }
 }

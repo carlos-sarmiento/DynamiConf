@@ -8,14 +8,14 @@
         {
             _sources = sources;
             Interpreter = configurationInterpreter;
-            Configuration = sources.DynamiConfiguration;
+            Configuration = sources.Configuration;
         }
 
         public IConfigurationInterpreter Interpreter { get; private set; }
 
         public void RegisterConfiguration(Configuration configuration)
         {
-            _sources.FinalConfiguration = _sources.FinalConfiguration.UpdateWith(configuration);
+            Configuration.RegisterConfiguration(configuration);
         }
 
         public DynamiConfiguration Configuration { get; private set; }

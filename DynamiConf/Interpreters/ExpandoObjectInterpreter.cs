@@ -8,7 +8,7 @@ namespace DynamiConf.Interpreters
         public static DynamiConfiguration ExpandoObject(this InterpreterSources provider, ExpandoObject obj)
         {
             provider.RegisterConfiguration(ExpandoObject2Configuration.Transform(obj));
-            return provider.DynamiConfiguration;
+            return provider.Configuration;
         }
     }
 }

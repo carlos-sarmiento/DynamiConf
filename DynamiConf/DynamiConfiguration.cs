@@ -8,13 +8,21 @@ namespace DynamiConf
         public DynamiConfiguration()
         {
             MergeWith = new InterpreterSources(this);
+            FinalConfiguration = new Configuration();
         }
 
         public InterpreterSources MergeWith { get; private set; }
 
+        private Configuration FinalConfiguration { get; set; }
+
         public dynamic GetConfiguration()
         {
-            return MergeWith.FinalConfiguration;
+            return FinalConfiguration;
+        }
+
+        internal void RegisterConfiguration(Configuration configuration)
+        {
+            FinalConfiguration = FinalConfiguration.UpdateWith(configuration);
         }
     }
 }

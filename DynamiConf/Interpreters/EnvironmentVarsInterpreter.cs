@@ -16,7 +16,7 @@ namespace DynamiConf.Interpreters
 
             provider.RegisterConfiguration(conf);
 
-            return provider.DynamiConfiguration;
+            return provider.Configuration;
         }
     }
 }
