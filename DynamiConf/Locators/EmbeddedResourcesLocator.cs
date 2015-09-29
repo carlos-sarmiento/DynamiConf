@@ -9,27 +9,36 @@ namespace DynamiConf.Locators
 {
     public static class EmbeddedResourcesLocator
     {
-        public static DynamiConfiguration EmbeddedResources(this LocationSources provider, string resourcePostfix = "default.conf", params string[] namespacesToLoad)
+        public static DynamiConfiguration EmbeddedResources(this LocationSources provider, string resourcePostfix = "default.conf")
         {
             var entryAssembly = Assembly.GetEntryAssembly();
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             var referencedAssemblies = assemblies.SelectMany(c => c.GetReferencedAssemblies());
 
-            var extraList = new Dictionary<string, Assembly>();
+            var assemblyQueue = new Queue<AssemblyName>(referencedAssemblies);
+            var assemblyList = new List<Assembly>();
+            var assemblyHash = new HashSet<string>();
 
-            foreach (var referencedAssembly in referencedAssemblies)
+            while (assemblyQueue.Count > 0)
             {
-                foreach (var @namespace in namespacesToLoad)
+                var referencedAssembly = assemblyQueue.Dequeue();
+
+                if (assemblyHash.Contains(referencedAssembly.FullName))
+                    continue;
+
+                var assembly = Assembly.Load(referencedAssembly);
+
+                foreach (var aa in assembly.GetReferencedAssemblies())
                 {
-                    if (referencedAssembly.FullName.StartsWith(@namespace) && !extraList.ContainsKey(referencedAssembly.FullName))
-                    {
-                        extraList.Add(referencedAssembly.FullName, Assembly.Load(referencedAssembly));
-                    }
+                    assemblyQueue.Enqueue(aa);
                 }
+
+                assemblyList.Add(assembly);
+                assemblyHash.Add(assembly.FullName);
             }
 
-            var resources = GetExpandoFromAssemblies(assemblies.Where(assembly => assembly != entryAssembly).Union(extraList.Values), resourcePostfix, provider.Interpreter);
+            var resources = GetExpandoFromAssemblies(assemblies.Union(assemblyList), resourcePostfix, provider.Interpreter);
 
             if (entryAssembly != null)
                 resources = resources.UpdateWith(GetExpandoFromAssemblies(new[] { entryAssembly }, resourcePostfix, provider.Interpreter));
