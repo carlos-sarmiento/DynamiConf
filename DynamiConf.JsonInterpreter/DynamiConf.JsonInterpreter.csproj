@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DynamiConf, Version=0.2.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamiConf.0.2.4.0\lib\net45\DynamiConf.dll</HintPath>
+    <Reference Include="DynamiConf, Version=0.2.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamiConf.0.2.4.1\lib\net45\DynamiConf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

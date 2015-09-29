@@ -9,12 +9,27 @@ namespace DynamiConf.Locators
 {
     public static class EmbeddedResourcesLocator
     {
-        public static DynamiConfiguration EmbeddedResources(this LocationSources provider, string resourcePostfix = "default.conf")
+        public static DynamiConfiguration EmbeddedResources(this LocationSources provider, string resourcePostfix = "default.conf", params string[] namespacesToLoad)
         {
             var entryAssembly = Assembly.GetEntryAssembly();
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            var resources = GetExpandoFromAssemblies(assemblies.Where(assembly => assembly != entryAssembly), resourcePostfix, provider.Interpreter);
+            var referencedAssemblies = assemblies.SelectMany(c => c.GetReferencedAssemblies());
+
+            var extraList = new Dictionary<string, Assembly>();
+
+            foreach (var referencedAssembly in referencedAssemblies)
+            {
+                foreach (var @namespace in namespacesToLoad)
+                {
+                    if (referencedAssembly.FullName.StartsWith(@namespace) && !extraList.ContainsKey(referencedAssembly.FullName))
+                    {
+                        extraList.Add(referencedAssembly.FullName, Assembly.Load(referencedAssembly));
+                    }
+                }
+            }
+
+            var resources = GetExpandoFromAssemblies(assemblies.Where(assembly => assembly != entryAssembly).Union(extraList.Values), resourcePostfix, provider.Interpreter);
 
             if (entryAssembly != null)
                 resources = resources.UpdateWith(GetExpandoFromAssemblies(new[] { entryAssembly }, resourcePostfix, provider.Interpreter));
